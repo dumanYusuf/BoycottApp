@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "257693369216",
+    "project_id": "boycottapp-86ec9",
+    "storage_bucket": "boycottapp-86ec9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257693369216:android:49a283f72122e2c5287765",
+        "android_client_info": {
+          "package_name": "com.example.boycottapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvSFLSehosoIcM1ENKzgvJ8GpeTFuoJpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
