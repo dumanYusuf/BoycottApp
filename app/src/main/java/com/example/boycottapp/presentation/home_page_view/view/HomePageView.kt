@@ -152,7 +152,6 @@ fun HomePageView(
                 )
             }
             else{
-
                 if (state.value.productList.isEmpty()){
                     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
@@ -162,59 +161,61 @@ fun HomePageView(
                             text = "Aradığınız Sonuç Bulunamadı")
                     }
                 }
-                LazyVerticalGrid(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = 140.dp),
-                    columns = GridCells.Fixed(2)) {
-                    items(state.value.productList){productList->
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(5.dp)
-                                .size(250.dp)) {
-                            Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
-                                Image(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .size(150.dp),
-                                    contentScale = ContentScale.Crop,
-                                    painter = rememberAsyncImagePainter(model = productList.productImage,
-                                        imageLoader = ImageLoader(context) ),
-                                    contentDescription ="" )
-                                Spacer(modifier = Modifier.padding(5.dp))
-                                Box(
-                                    modifier = Modifier
-                                        .background(
+               else{
+                    LazyVerticalGrid(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(bottom = 140.dp),
+                        columns = GridCells.Fixed(2)) {
+                        items(state.value.productList){productList->
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(5.dp)
+                                    .size(250.dp)) {
+                                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Image(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .size(150.dp),
+                                        contentScale = ContentScale.Crop,
+                                        painter = rememberAsyncImagePainter(model = productList.productImage,
+                                            imageLoader = ImageLoader(context) ),
+                                        contentDescription ="" )
+                                    Spacer(modifier = Modifier.padding(5.dp))
+                                    Box(
+                                        modifier = Modifier
+                                            .background(
+                                                color = when (productList.productStatus) {
+                                                    "Boykot" -> Color.Red.copy(alpha = 0.3f)
+                                                    "Uygun" -> Color.Blue.copy(alpha = 0.3f)
+                                                    else -> Color.Gray.copy(alpha = 0.3f)
+                                                },
+                                                shape = RoundedCornerShape(8.dp)
+                                            )
+                                            .padding(8.dp)
+                                    ) {
+                                        Text(
                                             color = when (productList.productStatus) {
-                                                "Boykot" -> Color.Red.copy(alpha = 0.3f)
-                                                "Uygun" -> Color.Blue.copy(alpha = 0.3f)
-                                                else -> Color.Gray.copy(alpha = 0.3f)
+                                                "Boykot" -> Color.Red
+                                                "Uygun" -> Color.Blue
+                                                else -> Color.Black
                                             },
-                                            shape = RoundedCornerShape(8.dp)
+                                            fontSize = 20.sp,
+                                            text = productList.productStatus
                                         )
-                                        .padding(8.dp)
-                                ) {
+                                    }
+                                    Spacer(modifier = Modifier.padding(5.dp))
                                     Text(
-                                        color = when (productList.productStatus) {
-                                            "Boykot" -> Color.Red
-                                            "Uygun" -> Color.Blue
-                                            else -> Color.Black
-                                        },
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         fontSize = 20.sp,
-                                        text = productList.productStatus
-                                    )
+                                        fontWeight = FontWeight.Bold,
+                                        text = productList.productName)
                                 }
-                                Spacer(modifier = Modifier.padding(5.dp))
-                                Text(
-                                    color = MaterialTheme.colorScheme.onBackground,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    text = productList.productName)
                             }
                         }
                     }
-                }
+               }
             }
         }
     }

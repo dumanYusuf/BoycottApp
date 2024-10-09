@@ -1,5 +1,6 @@
 package com.example.boycottapp.data.repo
 
+import com.example.boycottapp.domain.model.Category
 import com.example.boycottapp.domain.model.Products
 import com.example.boycottapp.domain.repo.BoykotRepo
 import com.example.boycottapp.util.Resource
@@ -49,6 +50,19 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
                 }
             }
             emit(Resource.Success(searchList))
+        }
+        catch (e:Exception){
+            emit(Resource.Error("Error:${e.message}"))
+        }
+    }
+
+    override suspend fun getCategory(): Flow<Resource<List<Category>>> = flow{
+        try {
+            val categoryDocRef=firestore.collection("Category").get().await()
+            val categoryList=categoryDocRef.documents.mapNotNull {
+                it.toObject(Category::class.java)
+            }
+            emit(Resource.Success(categoryList))
         }
         catch (e:Exception){
             emit(Resource.Error("Error:${e.message}"))
