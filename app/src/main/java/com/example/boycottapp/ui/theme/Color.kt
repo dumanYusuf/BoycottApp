@@ -12,3 +12,11 @@ val Pink40 = Color(0xFF7D5260)
 
 val LightTextColor = Color(0xFF000000)
 val DarkTextColor = Color(0xFFFFFFFF)
+
+val GreyLigth = Color(0xFF625b71)
+val GreyDark =Color(0xFFFFFFFF)
+
+val AcikMavi = Color(0xFF7457C5)
+val AcikKirmizi = Color(0xFFD13D3D)
+
+

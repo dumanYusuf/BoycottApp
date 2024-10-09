@@ -16,7 +16,8 @@ private val DarkColorScheme = darkColorScheme(
     secondary = PurpleGrey80,
     tertiary = Pink80,
     onBackground = DarkTextColor, // Koyu modda metin rengi
-    onSurface = DarkTextColor // Koyu modda metin rengi
+    onSurface = DarkTextColor, // Koyu modda metin rengi
+
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -24,7 +25,7 @@ private val LightColorScheme = lightColorScheme(
     secondary = PurpleGrey40,
     tertiary = Pink40 ,
     onBackground = LightTextColor, // Açık modda metin rengi
-    onSurface = LightTextColor // Açık modda metin rengi
+    onSurface = LightTextColor, // Açık modda metin rengi
 
 
     /* Other default colors to override
