@@ -17,7 +17,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -65,6 +67,7 @@ fun HomePageView(
     viewModel: HomePageViewModel= hiltViewModel()
 ) {
 
+
     LaunchedEffect(key1 = true) {
         viewModel.loadAllProducts()
     }
@@ -104,7 +107,7 @@ fun HomePageView(
                         containerColor = Purple80
                     ),
                     onClick = {
-                        //viewModel.filterProducts("Tümü")
+                        viewModel.loadAllProducts()
                     }) {
                     Text(
                         fontSize = 16.sp,
@@ -116,7 +119,7 @@ fun HomePageView(
                         containerColor = AcikKirmizi
                     ),
                     onClick = {
-                       // viewModel.filterProducts()
+                        viewModel.loadFilterProducts("Boykot")
                     }) {
                     Text(
                         fontSize = 16.sp,
@@ -128,7 +131,7 @@ fun HomePageView(
                         containerColor = AcikMavi
                     ),
                     onClick = {
-                       // viewModel.filterProducts("Uygun")
+                        viewModel.loadFilterProducts("Uygun")
                     }) {
                     Text(
                         fontSize = 16.sp,
@@ -137,7 +140,6 @@ fun HomePageView(
                 }
             }
             Spacer(modifier = Modifier.padding(10.dp))
-
             if (state.value.isLoading) {
                 CircularProgressIndicator(
                     color = Color.Red,
@@ -147,16 +149,20 @@ fun HomePageView(
                 )
             }
             else{
-                LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                LazyVerticalGrid(
+                    modifier = Modifier.fillMaxSize().padding(bottom = 140.dp),
+                    columns = GridCells.Fixed(2)) {
                     items(state.value.productList){productList->
                         Card(
                             modifier = Modifier
-                                .fillMaxSize()
+                                .fillMaxWidth()
                                 .padding(5.dp)
                                 .size(250.dp)) {
                             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
                                 Image(
-                                    modifier = Modifier.fillMaxWidth().size(150.dp),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .size(150.dp),
                                     contentScale = ContentScale.Crop,
                                     painter = rememberAsyncImagePainter(model = productList.productImage,
                                         imageLoader = ImageLoader(context) ),
@@ -197,6 +203,6 @@ fun HomePageView(
 
             }
         }
-
     }
+
 }

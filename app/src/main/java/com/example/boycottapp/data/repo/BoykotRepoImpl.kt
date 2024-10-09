@@ -24,4 +24,20 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
             emit(Resource.Error("Error:${e.message}"))
         }
     }
+
+    override suspend fun getBoycotAndUygunProducts(status: String): Flow<Resource<List<Products>>> = flow {
+        try {
+            val productQuery = firestore.collection("Products")
+                .whereEqualTo("productStatus", status).get().await()
+
+            val productList = productQuery.documents.mapNotNull {
+                it.toObject(Products::class.java)
+            }
+
+            emit(Resource.Success(productList))
+        } catch (e: Exception) {
+            emit(Resource.Error("Error: ${e.message}"))
+        }
+    }
+
 }
