@@ -40,4 +40,19 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
         }
     }
 
+    override suspend fun searchProduct(search: String): Flow<Resource<List<Products>>> = flow {
+        try {
+            val producDocRef=firestore.collection("Products").get().await()
+            val searchList = producDocRef.documents.mapNotNull { document ->
+                document.toObject(Products::class.java)?.takeIf { product ->
+                    product.productName.contains(search, ignoreCase = true)
+                }
+            }
+            emit(Resource.Success(searchList))
+        }
+        catch (e:Exception){
+            emit(Resource.Error("Error:${e.message}"))
+        }
+    }
+
 }

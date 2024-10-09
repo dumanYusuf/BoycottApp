@@ -95,7 +95,10 @@ fun HomePageView(
             Spacer(modifier = Modifier.padding(10.dp))
             CustomTextField(
                 value = search,
-                onValueChange = { search = it },
+                onValueChange = {
+                    search = it
+                    viewModel.searchProduct(it)
+                                },
                 placeholder = "Marka Ara...",
                 leadingIcon = R.drawable.search,
                 trailingIcon = R.drawable.clear
@@ -149,8 +152,20 @@ fun HomePageView(
                 )
             }
             else{
+
+                if (state.value.productList.isEmpty()){
+                    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            color = MaterialTheme.colorScheme.onBackground,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 24.sp,
+                            text = "Aradığınız Sonuç Bulunamadı")
+                    }
+                }
                 LazyVerticalGrid(
-                    modifier = Modifier.fillMaxSize().padding(bottom = 140.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 140.dp),
                     columns = GridCells.Fixed(2)) {
                     items(state.value.productList){productList->
                         Card(
@@ -200,7 +215,6 @@ fun HomePageView(
                         }
                     }
                 }
-
             }
         }
     }

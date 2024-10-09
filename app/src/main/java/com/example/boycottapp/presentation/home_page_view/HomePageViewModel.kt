@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.boycottapp.domain.model.Products
 import com.example.boycottapp.domain.use_case.get_filter_products_use_case.GetFilterProductsUseCase
 import com.example.boycottapp.domain.use_case.get_products_use_case.GetProductsUseCase
+import com.example.boycottapp.domain.use_case.search_products_use_case.SearchProductsUseCase
 import com.example.boycottapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomePageViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
-    private val getFilterProductsUseCase: GetFilterProductsUseCase
+    private val getFilterProductsUseCase: GetFilterProductsUseCase,
+    private val getSearchProductsUseCase: SearchProductsUseCase
 ):ViewModel() {
 
 
@@ -67,5 +69,29 @@ class HomePageViewModel @Inject constructor(
             }
         }
     }
+
+
+    fun searchProduct(search:String){
+        viewModelScope.launch {
+            _state.value=HomeState(isLoading = true)
+            getSearchProductsUseCase.searchProducts(search).collect{resultProducts->
+                when(resultProducts){
+                    is Resource.Success->{
+                        _state.value=HomeState(productList = resultProducts.data?: emptyList())
+                        Log.e("success products search ","success get search products:${resultProducts.data}")
+                    }
+                    is Resource.Error->{
+                        _state.value=HomeState(isError = "errror")
+                        Log.e("erorr products search ","error get search products:${resultProducts.message}")
+                    }
+                    is Resource.Loading->{
+                        _state.value=HomeState(isLoading = true)
+                        Log.e("loading products search","loading get search products")
+                    }
+                }
+            }
+        }
+    }
+
 
 }

@@ -9,5 +9,6 @@ interface BoykotRepo {
 
     suspend fun getProduct():Flow<Resource<List<Products>>>
     suspend fun getBoycotAndUygunProducts(status:String):Flow<Resource<List<Products>>>
+    suspend fun searchProduct(search:String):Flow<Resource<List<Products>>>
 
 }
