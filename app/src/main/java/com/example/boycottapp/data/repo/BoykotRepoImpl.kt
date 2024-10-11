@@ -2,6 +2,7 @@ package com.example.boycottapp.data.repo
 
 import android.util.Log
 import com.example.boycottapp.domain.model.Category
+import com.example.boycottapp.domain.model.News
 import com.example.boycottapp.domain.model.Products
 import com.example.boycottapp.domain.repo.BoykotRepo
 import com.example.boycottapp.util.Resource
@@ -83,6 +84,19 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
         } catch (e: Exception) {
             emit(Resource.Error("Error: ${e.localizedMessage}"))
             Log.e("error", "error: ${e.localizedMessage}")
+        }
+    }
+
+    override suspend fun getNewsBoykot(): Flow<Resource<List<News>>> = flow{
+        try {
+            val categoryDocRef=firestore.collection("News").get().await()
+            val categoryList=categoryDocRef.documents.mapNotNull {
+                it.toObject(News::class.java)
+            }
+            emit(Resource.Success(categoryList))
+        }
+        catch (e:Exception){
+            emit(Resource.Error("Error:${e.message}"))
         }
     }
 
