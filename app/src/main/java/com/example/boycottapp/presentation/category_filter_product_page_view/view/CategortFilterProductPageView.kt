@@ -49,13 +49,12 @@ import com.example.boycottapp.presentation.category_filter_product_page_view.Cat
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategortFilterProductPageView(
-    viewModel: CategoryFilterProductViewModel= hiltViewModel(),
-    onBackPresed:()->Unit,
-    category:Category
+    viewModel: CategoryFilterProductViewModel = hiltViewModel(),
+    onBackPressed: () -> Unit,
+    category: Category
 ) {
-
-    val state=viewModel.state.collectAsState()
-    val context= LocalContext.current
+    val state = viewModel.state.collectAsState()
+    val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
         viewModel.loadCategoryFilterProduct(category.categoryId)
@@ -63,19 +62,20 @@ fun CategortFilterProductPageView(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Row {
-
+            TopAppBar(
+                title = {
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        IconButton(onClick = { onBackPresed() }) {
-                           Icon(painter = painterResource(id = R.drawable.back), contentDescription ="" )
+                        IconButton(onClick = { onBackPressed() }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.back),
+                                contentDescription = ""
+                            )
                         }
                         Text(
-                            color =MaterialTheme.colorScheme.onBackground,
+                            color = MaterialTheme.colorScheme.onBackground,
                             fontWeight = FontWeight.Bold,
                             fontSize = 24.sp,
                             modifier = Modifier.padding(10.dp),
@@ -83,74 +83,82 @@ fun CategortFilterProductPageView(
                         )
                     }
                 }
-            })
+            )
         },
-
-
-        content = {innrrPadding->
-
-            if (state.value.isLoading){
-                CircularProgressIndicator(
-                    color = Color.Red,
-                    modifier = Modifier
-                        .padding(16.dp)
-                )
-            }
-            else{
-                LazyVerticalGrid(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innrrPadding),
-                    columns = GridCells.Fixed(2)) {
-                    items(state.value.productList){productList->
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(5.dp)
-                                .size(250.dp)) {
-                            Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
-                                Image(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
-                                    contentScale = ContentScale.Crop,
-                                    painter = rememberAsyncImagePainter(model = productList.productImage,
-                                        imageLoader = ImageLoader(context) ),
-                                    contentDescription ="" )
-                                Spacer(modifier = Modifier.padding(5.dp))
-                                Box(
-                                    modifier = Modifier
-                                        .background(
-                                            color = when (productList.productStatus) {
-                                                "Boykot" -> Color.Red.copy(alpha = 0.3f)
-                                                "Uygun" -> Color.Blue.copy(alpha = 0.3f)
-                                                else -> Color.Gray.copy(alpha = 0.3f)
-                                            },
-                                            shape = RoundedCornerShape(8.dp)
-                                        )
-                                        .padding(8.dp)
+        content = { innerPadding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                contentAlignment = Alignment.Center
+            ) {
+                if (state.value.isLoading) {
+                    CircularProgressIndicator(
+                        color = Color.Red,
+                        modifier = Modifier.size(50.dp)
+                    )
+                } else {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        items(state.value.productList) { productList ->
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(5.dp)
+                                    .size(250.dp)
+                            ) {
+                                Column(
+                                    modifier = Modifier.fillMaxSize(),
+                                    verticalArrangement = Arrangement.Top,
+                                    horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
+                                    Image(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        contentScale = ContentScale.Crop,
+                                        painter = rememberAsyncImagePainter(
+                                            model = productList.productImage,
+                                            imageLoader = ImageLoader(context)
+                                        ),
+                                        contentDescription = ""
+                                    )
+                                    Spacer(modifier = Modifier.padding(5.dp))
+                                    Box(
+                                        modifier = Modifier
+                                            .background(
+                                                color = when (productList.productStatus) {
+                                                    "Boykot" -> Color.Red.copy(alpha = 0.3f)
+                                                    "Uygun" -> Color.Blue.copy(alpha = 0.3f)
+                                                    else -> Color.Gray.copy(alpha = 0.3f)
+                                                },
+                                                shape = RoundedCornerShape(8.dp)
+                                            )
+                                            .padding(8.dp)
+                                    ) {
+                                        Text(
+                                            color = when (productList.productStatus) {
+                                                "Boykot" -> Color.Red
+                                                "Uygun" -> Color.Blue
+                                                else -> Color.Black
+                                            },
+                                            fontSize = 20.sp,
+                                            text = productList.productStatus
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.padding(5.dp))
                                     Text(
-                                        color = when (productList.productStatus) {
-                                            "Boykot" -> Color.Red
-                                            "Uygun" -> Color.Blue
-                                            else -> Color.Black
-                                        },
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         fontSize = 20.sp,
-                                        text = productList.productStatus
+                                        fontWeight = FontWeight.Bold,
+                                        text = productList.productName
                                     )
                                 }
-                                Spacer(modifier = Modifier.padding(5.dp))
-                                Text(
-                                    color = MaterialTheme.colorScheme.onBackground,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    text = productList.productName)
                             }
                         }
                     }
                 }
             }
-
         }
     )
 }

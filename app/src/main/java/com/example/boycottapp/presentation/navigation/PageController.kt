@@ -53,7 +53,7 @@ fun PageController() {
                     val decodedJsonCategory = URLDecoder.decode(jsonCategory, "UTF-8")
                     val category = Gson().fromJson(decodedJsonCategory, Category::class.java)
                   CategortFilterProductPageView(
-                      onBackPresed = {
+                      onBackPressed = {
                           navController.popBackStack()
                           currentIndex.value=1
                       },
