@@ -1,5 +1,6 @@
 package com.example.boycottapp.data.repo
 
+import android.util.Log
 import com.example.boycottapp.domain.model.Category
 import com.example.boycottapp.domain.model.Products
 import com.example.boycottapp.domain.repo.BoykotRepo
@@ -66,6 +67,22 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
         }
         catch (e:Exception){
             emit(Resource.Error("Error:${e.message}"))
+        }
+    }
+
+    override suspend fun getCategoryFilterProductPage(id: String): Flow<Resource<List<Products>>> = flow {
+        try {
+            val result = firestore.collection("Category")
+                .document(id)
+                .collection("Products").get().await()
+
+            val products = result.documents.mapNotNull {
+                it.toObject(Products::class.java)?.copy(productId = it.id)
+            }
+            emit(Resource.Success(products))
+        } catch (e: Exception) {
+            emit(Resource.Error("Error: ${e.localizedMessage}"))
+            Log.e("error", "error: ${e.localizedMessage}")
         }
     }
 

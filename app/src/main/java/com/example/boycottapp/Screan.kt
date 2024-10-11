@@ -7,5 +7,7 @@ package com.example.boycottapp
      object NewsPageView:Screan("news_page")
      object AboutPageView:Screan("about_page")
      object ProductDetailPageView:Screan("detail_page")
+     object CategoryFilterProductPage:Screan("category_filter_product_page")
+
 
  }
