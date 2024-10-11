@@ -3,6 +3,7 @@ package com.example.boycottapp.presentation.category_filter_product_page_view.vi
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,11 +39,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import com.example.boycottapp.R
+import com.example.boycottapp.Screan
 import com.example.boycottapp.domain.model.Category
 import com.example.boycottapp.presentation.category_filter_product_page_view.CategoryFilterProductViewModel
+import com.google.gson.Gson
+import java.net.URLEncoder
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -51,7 +56,8 @@ import com.example.boycottapp.presentation.category_filter_product_page_view.Cat
 fun CategortFilterProductPageView(
     viewModel: CategoryFilterProductViewModel = hiltViewModel(),
     onBackPressed: () -> Unit,
-    category: Category
+    category: Category,
+    navController: NavController
 ) {
     val state = viewModel.state.collectAsState()
     val context = LocalContext.current
@@ -107,7 +113,11 @@ fun CategortFilterProductPageView(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(5.dp)
-                                    .size(250.dp)
+                                    .size(250.dp).clickable {
+                                        val movieObject = Gson().toJson(productList)
+                                        val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
+                                        navController.navigate(Screan.ProductDetailPageView.route+"/$encodedMovieObject")
+                                    }
                             ) {
                                 Column(
                                     modifier = Modifier.fillMaxSize(),

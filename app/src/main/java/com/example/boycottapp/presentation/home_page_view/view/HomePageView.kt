@@ -3,6 +3,7 @@ package com.example.boycottapp.presentation.home_page_view.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,11 +41,14 @@ import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import com.example.boycottapp.R
+import com.example.boycottapp.Screan
 import com.example.boycottapp.presentation.component.CustomTextField
 import com.example.boycottapp.presentation.home_page_view.HomePageViewModel
 import com.example.boycottapp.ui.theme.AcikKirmizi
 import com.example.boycottapp.ui.theme.AcikMavi
 import com.example.boycottapp.ui.theme.Purple80
+import com.google.gson.Gson
+import java.net.URLEncoder
 
 
 @Composable
@@ -158,7 +162,11 @@ fun HomePageView(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(5.dp)
-                                    .size(250.dp)) {
+                                    .size(250.dp).clickable {
+                                        val movieObject = Gson().toJson(productList)
+                                        val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
+                                        navController.navigate(Screan.ProductDetailPageView.route+"/$encodedMovieObject")
+                                    }) {
                                 Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
                                     Image(
                                         modifier = Modifier

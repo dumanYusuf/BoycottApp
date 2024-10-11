@@ -10,4 +10,5 @@ package com.example.boycottapp
      object CategoryFilterProductPage:Screan("category_filter_product_page")
 
 
+
  }

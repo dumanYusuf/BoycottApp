@@ -16,6 +16,7 @@ import androidx.navigation.navArgument
 import com.example.boycottapp.R
 import com.example.boycottapp.Screan
 import com.example.boycottapp.domain.model.Category
+import com.example.boycottapp.domain.model.Products
 import com.example.boycottapp.presentation.about_us_view.AboutPageView
 import com.example.boycottapp.presentation.category_filter_product_page_view.view.CategortFilterProductPageView
 import com.example.boycottapp.presentation.category_page_view.view.CategoryPageView
@@ -57,6 +58,7 @@ fun PageController() {
                           navController.popBackStack()
                           currentIndex.value=1
                       },
+                      navController = navController,
                       category = category)
                 }
                 composable(Screan.NewsPageView.route) {
@@ -65,11 +67,20 @@ fun PageController() {
                 composable(Screan.AboutPageView.route) {
                     AboutPageView()
                 }
-                composable(Screan.ProductDetailPageView.route) {
-                    ProductDetailPageView {
-                        navController.popBackStack()
-                        currentIndex.value=0
-                    }
+                composable(Screan.ProductDetailPageView.route+"/{product}",
+                    arguments = listOf(
+                        navArgument("product"){type= NavType.StringType}
+                    )
+                ) {
+                    val jsonCategory = it.arguments?.getString("product")
+                    val decodedJsonCategory = URLDecoder.decode(jsonCategory, "UTF-8")
+                    val product = Gson().fromJson(decodedJsonCategory, Products::class.java)
+                   ProductDetailPageView(
+                       onBackPresed = {
+                           navController.popBackStack()
+                           currentIndex.value=0
+                       }, products = product)
+
                 }
             }
         },
