@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,7 +40,9 @@ import com.example.boycottapp.domain.model.Products
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -122,12 +125,17 @@ fun ProductDetailPageView(
                             text = "Kaynak"
                         )
                         Spacer(modifier = Modifier.padding(5.dp))
-                    ClickableText(
-                        text = AnnotatedString(products.productSupport),
-                        onClick = {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(products.productSupport))
-                            context.startActivity(intent)
-                        },
+                    Text(
+                        textDecoration = TextDecoration.Underline,
+                        text = products.productSupport,
+                        fontSize = 20.sp,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .clickable {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(products.productSupport))
+                                context.startActivity(intent)
+                            },
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }

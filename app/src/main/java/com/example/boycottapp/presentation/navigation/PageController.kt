@@ -20,6 +20,7 @@ import com.example.boycottapp.presentation.about_app_page_view.AboutAppPageView
 import com.example.boycottapp.presentation.about_us_view.view.AboutPageView
 import com.example.boycottapp.presentation.category_filter_product_page_view.view.CategortFilterProductPageView
 import com.example.boycottapp.presentation.category_page_view.view.CategoryPageView
+import com.example.boycottapp.presentation.contact_us_page_view.ContactUsePageView
 import com.example.boycottapp.presentation.donation_page_view.DonationPage
 import com.example.boycottapp.presentation.home_page_view.view.HomePageView
 import com.example.boycottapp.presentation.news_page_view.view.NewsPageView
@@ -64,6 +65,12 @@ fun PageController() {
                 }
                 composable(Screan.AboutAppPageView.route) {
                     AboutAppPageView {
+                        navController.popBackStack()
+                        currentIndex.value=3
+                    }
+                }
+                composable(Screan.ContactUsePageView.route) {
+                    ContactUsePageView {
                         navController.popBackStack()
                         currentIndex.value=3
                     }

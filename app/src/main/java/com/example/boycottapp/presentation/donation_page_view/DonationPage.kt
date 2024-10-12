@@ -1,5 +1,4 @@
 package com.example.boycottapp.presentation.donation_page_view
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,13 +26,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.decode.ImageSource
 import com.example.boycottapp.R
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DonationPage(
     onBackPresed: () -> Unit,
 ) {
-
     Scaffold(
         topBar = {
             TopAppBar(
