@@ -1,6 +1,7 @@
 package com.example.boycottapp.presentation.about_us_view.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,11 +24,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.boycottapp.R
+import com.example.boycottapp.Screan
 
 
 @Composable
-fun AboutPageView() {
+fun AboutPageView(
+    navController: NavController
+) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         Column (
@@ -50,7 +55,11 @@ fun AboutPageView() {
                         .align(Alignment.CenterHorizontally)
                         .padding(5.dp),
                     text = "Genel")
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.clickable {
+                        navController.navigate(Screan.AboutAppPageView.route)
+                    },
+                    verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         modifier = Modifier
                             .size(50.dp)

@@ -17,6 +17,7 @@ import com.example.boycottapp.R
 import com.example.boycottapp.Screan
 import com.example.boycottapp.domain.model.Category
 import com.example.boycottapp.domain.model.Products
+import com.example.boycottapp.presentation.about_app_page_view.AboutAppPageView
 import com.example.boycottapp.presentation.about_us_view.view.AboutPageView
 import com.example.boycottapp.presentation.category_filter_product_page_view.view.CategortFilterProductPageView
 import com.example.boycottapp.presentation.category_page_view.view.CategoryPageView
@@ -45,6 +46,12 @@ fun PageController() {
                 composable(Screan.CategoryPageView.route) {
                     CategoryPageView(navController = navController)
                 }
+                composable(Screan.AboutAppPageView.route) {
+                    AboutAppPageView {
+                        navController.popBackStack()
+                        currentIndex.value=3
+                    }
+                }
                 composable(Screan.CategoryFilterProductPage.route+"/{category}",
                     arguments = listOf(
                         navArgument("category"){type= NavType.StringType}
@@ -65,7 +72,7 @@ fun PageController() {
                     NewsPageView()
                 }
                 composable(Screan.AboutPageView.route) {
-                    AboutPageView()
+                    AboutPageView(navController = navController)
                 }
                 composable(Screan.ProductDetailPageView.route+"/{product}",
                     arguments = listOf(
