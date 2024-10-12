@@ -18,4 +18,5 @@ interface BoykotRepo {
     suspend fun getCategoryFilterProductPage(id:String):Flow<Resource<List<Products>>>
     suspend fun getNewsBoykot():Flow<Resource<List<News>>>
     suspend fun addSuggestionMessage(note:UsersNotification):Resource<UsersNotification>
+    suspend fun addObjectionMessage(note: UsersNotification):Resource<UsersNotification>
 }

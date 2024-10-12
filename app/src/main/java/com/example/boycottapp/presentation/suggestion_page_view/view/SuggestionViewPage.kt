@@ -118,7 +118,7 @@ fun SuggestionPageView(
                             value = ePosta.value,
                             onValueChange = { ePosta.value = it },
                             placeholderText = "Eposta giriniz",
-                            leadingIconResId = R.drawable.unlem,
+                            leadingIconResId = R.drawable.mailll,
                         )
                         Spacer(modifier = Modifier.height(10.dp))
                         CustomTextFieldSuggetionAndObjection(
@@ -126,7 +126,7 @@ fun SuggestionPageView(
                             onValueChange = { message.value = it },
                             maxLines = 3,
                             placeholderText = "Mesajınızı giriniz",
-                            leadingIconResId = R.drawable.unlem,
+                            leadingIconResId = R.drawable.oneri,
                         )
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(

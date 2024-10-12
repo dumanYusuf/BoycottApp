@@ -114,4 +114,16 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
         }
     }
 
+    override suspend fun addObjectionMessage(note: UsersNotification): Resource<UsersNotification> {
+        return try {
+            val docRef=firestore.collection("Objection").add(note).await()
+            val newNote=note.copy(userNotificationId = note.userNotificationId)
+            docRef.set(newNote.toMap()).await()
+            Resource.Success(newNote)
+        }
+        catch (e:Exception){
+            Resource.Error("Error:${e.message}")
+        }
+    }
+
 }

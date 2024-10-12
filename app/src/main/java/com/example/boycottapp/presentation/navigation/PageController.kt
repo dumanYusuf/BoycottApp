@@ -49,18 +49,18 @@ fun PageController() {
                 composable(Screan.CategoryPageView.route) {
                     CategoryPageView(navController = navController)
                 }
-                composable(Screan.ObjectionPageView.route) {
-                   ObjectionPageView {
-                       navController.popBackStack()
-                       currentIndex.value=3
-                   }
-                }
                 composable(Screan.SuggestionPageView.route) {
                    SuggestionPageView(
                        onBackPresed = {
                            navController.popBackStack()
                            currentIndex.value=3
                        })
+                }
+                composable(Screan.ObjectionPageView.route) {
+                    ObjectionPageView(onBackPresed = {
+                        navController.popBackStack()
+                        currentIndex.value=3
+                    })
                 }
                 composable(Screan.AboutAppPageView.route) {
                     AboutAppPageView {
