@@ -23,6 +23,7 @@ import com.example.boycottapp.presentation.category_filter_product_page_view.vie
 import com.example.boycottapp.presentation.category_page_view.view.CategoryPageView
 import com.example.boycottapp.presentation.home_page_view.view.HomePageView
 import com.example.boycottapp.presentation.news_page_view.view.NewsPageView
+import com.example.boycottapp.presentation.partner_ship_page_view.PartnerShipPageView
 import com.example.boycottapp.presentation.product_detail_view.ProductDetailPageView
 import com.google.gson.Gson
 import java.net.URLDecoder
@@ -73,6 +74,12 @@ fun PageController() {
                 }
                 composable(Screan.AboutPageView.route) {
                     AboutPageView(navController = navController)
+                }
+                composable(Screan.PartnerShipPageView.route) {
+                   PartnerShipPageView {
+                       navController.popBackStack()
+                       currentIndex.value=3
+                   }
                 }
                 composable(Screan.ProductDetailPageView.route+"/{product}",
                     arguments = listOf(
