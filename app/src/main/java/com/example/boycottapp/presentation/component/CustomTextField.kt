@@ -32,7 +32,7 @@ fun CustomTextField(
                 style = MaterialTheme.typography.bodyMedium
             )
         },
-        maxLines = 1,
+        maxLines = 2,
         leadingIcon = {
             Icon(
                 painter = painterResource(id = leadingIcon),

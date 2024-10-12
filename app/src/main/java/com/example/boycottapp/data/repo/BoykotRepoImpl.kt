@@ -4,6 +4,8 @@ import android.util.Log
 import com.example.boycottapp.domain.model.Category
 import com.example.boycottapp.domain.model.News
 import com.example.boycottapp.domain.model.Products
+import com.example.boycottapp.domain.model.UsersNotification
+import com.example.boycottapp.domain.model.toMap
 import com.example.boycottapp.domain.repo.BoykotRepo
 import com.example.boycottapp.util.Resource
 import com.google.firebase.firestore.FirebaseFirestore
@@ -97,6 +99,18 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
         }
         catch (e:Exception){
             emit(Resource.Error("Error:${e.message}"))
+        }
+    }
+
+    override suspend fun addSuggestionMessage(note: UsersNotification):Resource<UsersNotification> {
+        return try {
+            val docRef = firestore.collection("SuggestionMessage").add(note).await()
+            val newNote = note.copy(userNotificationId = note.userNotificationId)
+            docRef.set(newNote.toMap()).await()
+            Resource.Success(newNote)
+        }
+        catch (e:Exception){
+            Resource.Error("Error:${e.message}")
         }
     }
 

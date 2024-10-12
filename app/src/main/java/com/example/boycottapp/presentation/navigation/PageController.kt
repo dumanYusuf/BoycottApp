@@ -56,10 +56,11 @@ fun PageController() {
                    }
                 }
                 composable(Screan.SuggestionPageView.route) {
-                    SuggestionPageView {
-                        navController.popBackStack()
-                        currentIndex.value=3
-                    }
+                   SuggestionPageView(
+                       onBackPresed = {
+                           navController.popBackStack()
+                           currentIndex.value=3
+                       })
                 }
                 composable(Screan.AboutAppPageView.route) {
                     AboutAppPageView {
