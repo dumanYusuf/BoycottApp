@@ -17,7 +17,7 @@ import com.example.boycottapp.R
 import com.example.boycottapp.Screan
 import com.example.boycottapp.domain.model.Category
 import com.example.boycottapp.domain.model.Products
-import com.example.boycottapp.presentation.about_us_view.AboutPageView
+import com.example.boycottapp.presentation.about_us_view.view.AboutPageView
 import com.example.boycottapp.presentation.category_filter_product_page_view.view.CategortFilterProductPageView
 import com.example.boycottapp.presentation.category_page_view.view.CategoryPageView
 import com.example.boycottapp.presentation.home_page_view.view.HomePageView

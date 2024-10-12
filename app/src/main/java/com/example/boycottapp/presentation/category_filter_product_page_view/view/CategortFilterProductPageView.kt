@@ -113,7 +113,7 @@ fun CategortFilterProductPageView(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(5.dp)
-                                    .size(250.dp).clickable {
+                                    .size(280.dp).clickable {
                                         val movieObject = Gson().toJson(productList)
                                         val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
                                         navController.navigate(Screan.ProductDetailPageView.route+"/$encodedMovieObject")
