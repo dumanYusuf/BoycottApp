@@ -19,4 +19,7 @@ val GreyDark =Color(0xFFFFFFFF)
 val AcikMavi = Color(0xFF7457C5)
 val AcikKirmizi = Color(0xFFD13D3D)
 
+val AcikMaviGonder = Color(0xFF4198EE)
+
+
 

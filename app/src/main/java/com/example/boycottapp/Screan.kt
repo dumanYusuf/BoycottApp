@@ -11,6 +11,10 @@ package com.example.boycottapp
      object AboutAppPageView:Screan("about__app_page")
      object PartnerShipPageView:Screan("partner_ship_page")
      object DonationPageView:Screan("donation_page")
+     object SuggestionPageView:Screan("suggestion_page")
+     object ObjectionPageView:Screan("suggestion_page")
+
+
 
 
 

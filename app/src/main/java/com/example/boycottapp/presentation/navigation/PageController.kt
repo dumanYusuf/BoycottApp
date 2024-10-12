@@ -5,7 +5,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -24,8 +23,10 @@ import com.example.boycottapp.presentation.category_page_view.view.CategoryPageV
 import com.example.boycottapp.presentation.donation_page_view.DonationPage
 import com.example.boycottapp.presentation.home_page_view.view.HomePageView
 import com.example.boycottapp.presentation.news_page_view.view.NewsPageView
+import com.example.boycottapp.presentation.objection_page_view.view.ObjectionPageView
 import com.example.boycottapp.presentation.partner_ship_page_view.PartnerShipPageView
 import com.example.boycottapp.presentation.product_detail_view.ProductDetailPageView
+import com.example.boycottapp.presentation.suggestion_page_view.view.SuggestionPageView
 import com.google.gson.Gson
 import java.net.URLDecoder
 
@@ -47,6 +48,18 @@ fun PageController() {
                 }
                 composable(Screan.CategoryPageView.route) {
                     CategoryPageView(navController = navController)
+                }
+                composable(Screan.ObjectionPageView.route) {
+                   ObjectionPageView {
+                       navController.popBackStack()
+                       currentIndex.value=3
+                   }
+                }
+                composable(Screan.SuggestionPageView.route) {
+                    SuggestionPageView {
+                        navController.popBackStack()
+                        currentIndex.value=3
+                    }
                 }
                 composable(Screan.AboutAppPageView.route) {
                     AboutAppPageView {

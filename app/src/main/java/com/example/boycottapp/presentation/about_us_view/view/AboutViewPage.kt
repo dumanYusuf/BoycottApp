@@ -126,7 +126,11 @@ fun AboutPageView(
                         .align(Alignment.CenterHorizontally)
                         .padding(5.dp),
                     text = "İletişim")
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.clickable {
+                        navController.navigate(Screan.SuggestionPageView.route)
+                    },
+                    verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         modifier = Modifier
                             .size(50.dp)
@@ -140,7 +144,11 @@ fun AboutPageView(
                         text = "Öneri")
                 }
                 Spacer(modifier = Modifier.padding(10.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.clickable {
+                        navController.navigate(Screan.ObjectionPageView.route)
+                    },
+                    verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         modifier = Modifier
                             .size(50.dp)
