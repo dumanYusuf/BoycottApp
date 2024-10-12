@@ -91,7 +91,11 @@ fun AboutPageView(
                         text = "İş Birliği")
                 }
                 Spacer(modifier = Modifier.padding(10.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.clickable {
+                        navController.navigate(Screan.DonationPageView.route)
+                    },
+                    verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         modifier = Modifier
                             .size(50.dp)
