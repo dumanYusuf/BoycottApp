@@ -40,6 +40,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
+import com.example.boycottapp.BannerAdView
 import com.example.boycottapp.R
 import com.example.boycottapp.Screan
 import com.example.boycottapp.presentation.component.CustomTextField
@@ -162,10 +163,12 @@ fun HomePageView(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(5.dp)
-                                    .size(250.dp).clickable {
+                                    .size(250.dp)
+                                    .clickable {
                                         val movieObject = Gson().toJson(productList)
-                                        val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
-                                        navController.navigate(Screan.ProductDetailPageView.route+"/$encodedMovieObject")
+                                        val encodedMovieObject =
+                                            URLEncoder.encode(movieObject, "UTF-8")
+                                        navController.navigate(Screan.ProductDetailPageView.route + "/$encodedMovieObject")
                                     }) {
                                 Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
                                     Image(
@@ -213,5 +216,4 @@ fun HomePageView(
             }
         }
     }
-
 }

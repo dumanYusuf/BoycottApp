@@ -107,4 +107,7 @@ dependencies {
 // sayfalar arası veri transferi
     implementation("com.google.code.gson:gson:2.10.1")
 
+    // play servis
+    implementation("com.google.android.gms:play-services-ads:23.3.0")
+
 }

@@ -64,7 +64,7 @@ fun AboutPageView(
                 Row(
                     modifier = Modifier.clickable {
                         navController.navigate(Screan.AboutAppPageView.route)
-                    },
+                    }.padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
@@ -85,7 +85,7 @@ fun AboutPageView(
                 Row(
                     modifier = Modifier.clickable {
                         navController.navigate(Screan.PartnerShipPageView.route)
-                    },
+                    }.padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
@@ -132,7 +132,7 @@ fun AboutPageView(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-                    .size(250.dp)
+                    .size(280.dp)
             ) {
                 Text(
                     color = MaterialTheme.colorScheme.onBackground,
@@ -145,7 +145,7 @@ fun AboutPageView(
                 Row(
                     modifier = Modifier.clickable {
                         navController.navigate(Screan.SuggestionPageView.route)
-                    },
+                    }.padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
@@ -166,7 +166,7 @@ fun AboutPageView(
                 Row(
                     modifier = Modifier.clickable {
                         navController.navigate(Screan.ObjectionPageView.route)
-                    },
+                    }.padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
@@ -187,7 +187,7 @@ fun AboutPageView(
                 Row(
                     modifier = Modifier.clickable {
                         navController.navigate(Screan.ContactUsePageView.route)
-                    },
+                    }.padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         modifier = Modifier

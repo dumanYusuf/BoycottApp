@@ -1,17 +1,24 @@
 package com.example.boycottapp.presentation.navigation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.boycottapp.BannerAdView
 import com.example.boycottapp.R
 import com.example.boycottapp.Screan
 import com.example.boycottapp.domain.model.Category
@@ -43,7 +50,8 @@ fun PageController() {
 
     Scaffold(
         content = {
-            NavHost(navController = navController, startDestination = Screan.HomePageView.route) {
+            NavHost(
+                navController = navController, startDestination = Screan.HomePageView.route,) {
                 composable(Screan.HomePageView.route) {
                     HomePageView(navController = navController)
                 }
@@ -51,45 +59,46 @@ fun PageController() {
                     CategoryPageView(navController = navController)
                 }
                 composable(Screan.SuggestionPageView.route) {
-                   SuggestionPageView(
-                       onBackPresed = {
-                           navController.popBackStack()
-                           currentIndex.value=3
-                       })
+                    SuggestionPageView(
+                        onBackPresed = {
+                            navController.popBackStack()
+                            currentIndex.value = 3
+                        })
                 }
                 composable(Screan.ObjectionPageView.route) {
                     ObjectionPageView(onBackPresed = {
                         navController.popBackStack()
-                        currentIndex.value=3
+                        currentIndex.value = 3
                     })
                 }
                 composable(Screan.AboutAppPageView.route) {
                     AboutAppPageView {
                         navController.popBackStack()
-                        currentIndex.value=3
+                        currentIndex.value = 3
                     }
                 }
                 composable(Screan.ContactUsePageView.route) {
                     ContactUsePageView {
                         navController.popBackStack()
-                        currentIndex.value=3
+                        currentIndex.value = 3
                     }
                 }
-                composable(Screan.CategoryFilterProductPage.route+"/{category}",
+                composable(Screan.CategoryFilterProductPage.route + "/{category}",
                     arguments = listOf(
-                        navArgument("category"){type= NavType.StringType}
+                        navArgument("category") { type = NavType.StringType }
                     )
                 ) {
                     val jsonCategory = it.arguments?.getString("category")
                     val decodedJsonCategory = URLDecoder.decode(jsonCategory, "UTF-8")
                     val category = Gson().fromJson(decodedJsonCategory, Category::class.java)
-                  CategortFilterProductPageView(
-                      onBackPressed = {
-                          navController.popBackStack()
-                          currentIndex.value=1
-                      },
-                      navController = navController,
-                      category = category)
+                    CategortFilterProductPageView(
+                        onBackPressed = {
+                            navController.popBackStack()
+                            currentIndex.value = 1
+                        },
+                        navController = navController,
+                        category = category
+                    )
                 }
                 composable(Screan.NewsPageView.route) {
                     NewsPageView()
@@ -100,65 +109,69 @@ fun PageController() {
                 composable(Screan.DonationPageView.route) {
                     DonationPage {
                         navController.popBackStack()
-                        currentIndex.value=3
+                        currentIndex.value = 3
                     }
                 }
                 composable(Screan.PartnerShipPageView.route) {
-                   PartnerShipPageView {
-                       navController.popBackStack()
-                       currentIndex.value=3
-                   }
+                    PartnerShipPageView {
+                        navController.popBackStack()
+                        currentIndex.value = 3
+                    }
                 }
-                composable(Screan.ProductDetailPageView.route+"/{product}",
+                composable(Screan.ProductDetailPageView.route + "/{product}",
                     arguments = listOf(
-                        navArgument("product"){type= NavType.StringType}
+                        navArgument("product") { type = NavType.StringType }
                     )
                 ) {
                     val jsonCategory = it.arguments?.getString("product")
                     val decodedJsonCategory = URLDecoder.decode(jsonCategory, "UTF-8")
                     val product = Gson().fromJson(decodedJsonCategory, Products::class.java)
-                   ProductDetailPageView(
-                       onBackPresed = {
-                           navController.popBackStack()
-                           currentIndex.value=0
-                       }, products = product)
-
+                    ProductDetailPageView(
+                        onBackPresed = {
+                            navController.popBackStack()
+                            currentIndex.value = 0
+                        }, products = product
+                    )
                 }
             }
         },
         bottomBar = {
-            if (currentRoute in listOf(Screan.HomePageView.route, Screan.CategoryPageView.route, Screan.NewsPageView.route, Screan.AboutPageView.route)) {
-                NavigationBar{
-                    items.forEachIndexed { index, item ->
-                        NavigationBarItem(
-                            selected = currentIndex.value == index,
-                            onClick = {
-                                currentIndex.value = index
-                                when (index) {
-                                    0 -> navController.navigate(Screan.HomePageView.route)
-                                    1 -> navController.navigate(Screan.CategoryPageView.route)
-                                    2 -> navController.navigate(Screan.NewsPageView.route)
-                                    3 -> navController.navigate(Screan.AboutPageView.route)
+            Column {
+                BannerAdView()
+                if (currentRoute in listOf(Screan.HomePageView.route, Screan.CategoryPageView.route, Screan.NewsPageView.route, Screan.AboutPageView.route)) {
+                    NavigationBar{
+                        items.forEachIndexed { index, item ->
+                            NavigationBarItem(
+                                selected = currentIndex.value == index,
+                                onClick = {
+                                    currentIndex.value = index
+                                    when (index) {
+                                        0 -> navController.navigate(Screan.HomePageView.route)
+                                        1 -> navController.navigate(Screan.CategoryPageView.route)
+                                        2 -> navController.navigate(Screan.NewsPageView.route)
+                                        3 -> navController.navigate(Screan.AboutPageView.route)
+                                    }
+                                },
+                                label = { Text(text = item) },
+                                icon = {
+                                    when (item) {
+                                        "Anasayfa" -> {
+                                            Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
+                                        }
+                                        "Kategoriler" -> {
+                                            Icon(painter = painterResource(id = R.drawable.category), contentDescription = "")
+                                        }
+                                        "Haberler" -> {
+                                            Icon(painter = painterResource(id = R.drawable.news), contentDescription = "")
+                                        }
+                                        "Hakkında" -> {
+                                            Icon(painter = painterResource(id = R.drawable.person), contentDescription = "")
+                                        }
+                                    }
                                 }
-                            },
-                            label = { Text(text = item) },
-                            icon = {
-                                when (item) {
-                                    "Anasayfa" -> {
-                                        Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-                                    }
-                                    "Kategoriler" -> {
-                                        Icon(painter = painterResource(id = R.drawable.category), contentDescription = "")
-                                    }
-                                    "Haberler" -> {
-                                        Icon(painter = painterResource(id = R.drawable.news), contentDescription = "")
-                                    }
-                                    "Hakkında" -> {
-                                        Icon(painter = painterResource(id = R.drawable.person), contentDescription = "")
-                                    }
-                                }
-                            }
-                        )
+                            )
+
+                        }
                     }
                 }
             }

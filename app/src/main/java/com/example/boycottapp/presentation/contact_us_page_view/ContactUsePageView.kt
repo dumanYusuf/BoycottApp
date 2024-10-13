@@ -84,6 +84,7 @@ fun ContactUsePageView(
                            fontWeight = FontWeight.Bold,
                            text = "Mail Adresi")
                    }
+                    Spacer(modifier = Modifier.padding(5.dp))
                     Text(
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 20.sp,
@@ -97,7 +98,7 @@ fun ContactUsePageView(
                         },
                         text = "dumannyusuf65@gmail.com"
                     )
-                    Spacer(modifier = Modifier.padding(10.dp))
+                    Spacer(modifier = Modifier.padding(15.dp))
                    Row (modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
                        Image(
                            modifier = Modifier.size(50.dp),
@@ -108,6 +109,7 @@ fun ContactUsePageView(
                            fontWeight = FontWeight.Bold,
                            text = "Telefon Numarası")
                    }
+                    Spacer(modifier = Modifier.padding(5.dp))
                     Text(
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 20.sp,

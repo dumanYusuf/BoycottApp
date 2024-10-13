@@ -132,8 +132,14 @@ fun ProductDetailPageView(
                         color = MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier
                             .clickable {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(products.productSupport))
-                                context.startActivity(intent)
+                                if (products.productSupport=="Eklenecek..."){
+
+                                }
+                                else{
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(products.productSupport))
+                                    context.startActivity(intent)
+                                }
+
                             },
                         style = MaterialTheme.typography.bodyMedium
                     )
