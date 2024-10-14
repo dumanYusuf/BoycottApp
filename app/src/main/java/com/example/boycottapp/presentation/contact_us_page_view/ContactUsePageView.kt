@@ -39,10 +39,7 @@ import com.example.boycottapp.R
 fun ContactUsePageView(
     onBackPresed:()->Unit
 ) {
-
-
     val context= LocalContext.current
-
     Scaffold(
         topBar = {
             TopAppBar(

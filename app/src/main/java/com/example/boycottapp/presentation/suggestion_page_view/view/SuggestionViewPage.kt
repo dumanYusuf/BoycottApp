@@ -79,6 +79,7 @@ fun SuggestionPageView(
                     .padding(innerPadding)
                     .padding(25.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 Card(
                     modifier = Modifier
@@ -91,7 +92,7 @@ fun SuggestionPageView(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "Marka Öner",
+                            text = " Bir Marka Öner",
                             color = MaterialTheme.colorScheme.onBackground,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,

@@ -92,6 +92,7 @@ fun ObjectionPageView(
                     .padding(innerPadding)
                     .padding(25.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 Card(
                     modifier = Modifier

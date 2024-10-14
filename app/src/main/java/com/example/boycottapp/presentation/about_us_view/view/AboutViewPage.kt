@@ -102,27 +102,6 @@ fun AboutPageView(
                         text = "İş Birliği"
                     )
                 }
-                Spacer(modifier = Modifier.padding(10.dp))
-               /* Row(
-                    modifier = Modifier.clickable {
-                        navController.navigate(Screan.DonationPageView.route)
-                    },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .clip(CircleShape),
-                        painter = painterResource(id = R.drawable.bagiss),
-                        contentDescription = ""
-                    )
-                    Spacer(modifier = Modifier.padding(5.dp))
-                    Text(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontSize = 20.sp,
-                        text = "Bağış Yap"
-                    )
-                }*/
             }
 
             // İkinci card
@@ -203,33 +182,6 @@ fun AboutPageView(
                         text = "Bize Ulaş"
                     )
                 }
-               /* Spacer(modifier = Modifier.padding(10.dp))
-                Row(
-                    modifier = Modifier.clickable {
-                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                            type = "text/plain"
-                            putExtra(Intent.EXTRA_SUBJECT, "Uygulamayı Paylaş")
-                            // burda playStora yükledikten sonra linki koy
-                            putExtra(Intent.EXTRA_TEXT, "Boycott uygulamasını indir: https://play.google.com/store/apps/details?id=com.example.boycottapp")
-                        }
-                        context.startActivity(Intent.createChooser(shareIntent, "Uygulamayı Paylaş"))
-                    },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .clip(CircleShape),
-                        painter = painterResource(id = R.drawable.playstore),
-                        contentDescription = ""
-                    )
-                    Spacer(modifier = Modifier.padding(5.dp))
-                    Text(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontSize = 20.sp,
-                        text = "Uygulamayı Paylaş"
-                    )
-                }*/
             }
         }
     }
