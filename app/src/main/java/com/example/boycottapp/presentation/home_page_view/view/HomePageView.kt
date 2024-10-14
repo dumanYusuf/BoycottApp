@@ -131,7 +131,7 @@ fun HomePageView(
                             color = MaterialTheme.colorScheme.onBackground,
                             fontWeight = FontWeight.Bold,
                             fontSize = 24.sp,
-                            text = "Aradığınız Sonuç Bulunamadı"
+                            text = "Aradığınız sonuç bulunamadı"
                         )
                     }
                 } else {

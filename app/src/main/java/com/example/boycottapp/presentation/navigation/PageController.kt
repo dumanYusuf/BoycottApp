@@ -1,5 +1,6 @@
 package com.example.boycottapp.presentation.navigation
 
+import SplashScreen
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -51,7 +52,12 @@ fun PageController() {
     Scaffold(
         content = {
             NavHost(
-                navController = navController, startDestination = Screan.HomePageView.route,) {
+                navController = navController, startDestination = Screan.SplashScreen.route,) {
+
+                composable(Screan.SplashScreen.route) {
+                    SplashScreen(navController = navController)
+                }
+
                 composable(Screan.HomePageView.route) {
                     HomePageView(navController = navController)
                 }

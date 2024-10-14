@@ -110,4 +110,8 @@ dependencies {
     // play servis
     implementation("com.google.android.gms:play-services-ads:23.3.0")
 
+    // splashScrean
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
+
 }

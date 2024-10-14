@@ -14,6 +14,8 @@ package com.example.boycottapp
      object SuggestionPageView:Screan("suggestion_page")
      object ObjectionPageView:Screan("objection_page")
      object ContactUsePageView:Screan("contact_page")
+     object SplashScreen:Screan("splash_screan")
+
 
 
 
