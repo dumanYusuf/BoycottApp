@@ -125,7 +125,7 @@ fun CategortFilterProductPageView(
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Image(
-                                        modifier = Modifier.fillMaxWidth(),
+                                        modifier = Modifier.fillMaxWidth().size(150.dp),
                                         contentScale = ContentScale.Crop,
                                         painter = rememberAsyncImagePainter(
                                             model = productList.productImage,

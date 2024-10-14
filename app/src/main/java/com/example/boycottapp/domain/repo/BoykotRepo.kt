@@ -19,4 +19,5 @@ interface BoykotRepo {
     suspend fun getNewsBoykot():Flow<Resource<List<News>>>
     suspend fun addSuggestionMessage(note:UsersNotification):Resource<UsersNotification>
     suspend fun addObjectionMessage(note: UsersNotification):Resource<UsersNotification>
+    suspend fun getProductInCategory():Flow<Resource<List<Products>>>
 }

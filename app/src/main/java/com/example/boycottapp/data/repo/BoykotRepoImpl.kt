@@ -32,14 +32,23 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
 
     override suspend fun getBoycotAndUygunProducts(status: String): Flow<Resource<List<Products>>> = flow {
         try {
-            val productQuery = firestore.collection("Products")
-                .whereEqualTo("productStatus", status).get().await()
+            val categories = firestore.collection("Category").get().await()
 
-            val productList = productQuery.documents.mapNotNull {
-                it.toObject(Products::class.java)
+            val allProducts = mutableListOf<Products>()
+
+            for (category in categories.documents) {
+                val productDocs = category.reference.collection("Products").get().await()
+
+                val productsInCategory = productDocs.documents.mapNotNull {
+                    it.toObject(Products::class.java)
+                }
+
+                allProducts.addAll(productsInCategory)
             }
 
-            emit(Resource.Success(productList))
+            val filteredProducts = allProducts.filter { it.productStatus == status }
+
+            emit(Resource.Success(filteredProducts))
         } catch (e: Exception) {
             emit(Resource.Error("Error: ${e.message}"))
         }
@@ -125,5 +134,27 @@ class BoykotRepoImpl @Inject constructor(private val firestore: FirebaseFirestor
             Resource.Error("Error:${e.message}")
         }
     }
+
+    override suspend fun getProductInCategory(): Flow<Resource<List<Products>>> = flow {
+        try {
+            val categories = firestore.collection("Category").get().await()
+
+            val allProducts = mutableListOf<Products>()
+
+            for (category in categories.documents) {
+                val productDocs = category.reference.collection("Products").get().await()
+
+                val productsInCategory = productDocs.documents.mapNotNull {
+                    it.toObject(Products::class.java)
+                }
+
+                allProducts.addAll(productsInCategory)
+            }
+            emit(Resource.Success(allProducts))
+        } catch (e: Exception) {
+            emit(Resource.Error("Error: ${e.message}"))
+        }
+    }
+
 
 }

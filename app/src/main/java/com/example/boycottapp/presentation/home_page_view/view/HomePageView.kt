@@ -1,32 +1,15 @@
 package com.example.boycottapp.presentation.home_page_view.view
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,100 +23,96 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
-import com.example.boycottapp.BannerAdView
 import com.example.boycottapp.R
 import com.example.boycottapp.Screan
 import com.example.boycottapp.presentation.component.CustomTextField
 import com.example.boycottapp.presentation.home_page_view.HomePageViewModel
-import com.example.boycottapp.ui.theme.AcikKirmizi
-import com.example.boycottapp.ui.theme.AcikMavi
-import com.example.boycottapp.ui.theme.Purple80
 import com.google.gson.Gson
 import java.net.URLEncoder
-
 
 @Composable
 fun HomePageView(
     navController: NavController,
-    viewModel: HomePageViewModel= hiltViewModel()
+    viewModel: HomePageViewModel = hiltViewModel()
 ) {
-
-
     LaunchedEffect(key1 = true) {
-        viewModel.loadAllProducts()
+        //viewModel.loadAllProducts()
+        viewModel.loadAllINProducts()
     }
 
-    val context= LocalContext.current
-    val state=viewModel.state.collectAsState()
+    val context = LocalContext.current
+    val state = viewModel.state.collectAsState()
     var search by remember { mutableStateOf("") }
+    var selectedTabIndex by remember { mutableStateOf(0) }
 
     Column(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 50.dp),
-            horizontalAlignment = Alignment.CenterHorizontally) {
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Row {
                 Icon(
                     tint = Color.Red,
-                    painter = painterResource(id = R.drawable.clear), contentDescription ="" )
+                    painter = painterResource(id = R.drawable.clear),
+                    contentDescription = ""
+                )
                 Text(
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    text = "BOYKOT")
+                    text = "BOYKOT"
+                )
             }
+
             Spacer(modifier = Modifier.padding(10.dp))
+
             CustomTextField(
                 value = search,
                 onValueChange = {
                     search = it
                     viewModel.searchProduct(it)
-                                },
+                },
                 placeholder = "Marka Ara...",
                 leadingIcon = R.drawable.search,
                 trailingIcon = R.drawable.clear
             )
+
             Spacer(modifier = Modifier.padding(10.dp))
-            Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Purple80
-                    ),
+
+            TabRow(selectedTabIndex = selectedTabIndex) {
+                Tab(
+                    selectedContentColor = MaterialTheme.colorScheme.onBackground,
+                    selected = selectedTabIndex == 0,
                     onClick = {
-                        viewModel.loadAllProducts()
-                    }) {
-                    Text(
-                        fontSize = 16.sp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        text = "Tümü")
-                }
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = AcikKirmizi
-                    ),
+                        selectedTabIndex = 0
+                        viewModel.loadAllINProducts()
+                    },
+                    text = { Text("Tümü") }
+                )
+                Tab(
+                    selectedContentColor = MaterialTheme.colorScheme.onBackground,
+                    selected = selectedTabIndex == 1,
                     onClick = {
+                        selectedTabIndex = 1
                         viewModel.loadFilterProducts("Boykot")
-                    }) {
-                    Text(
-                        fontSize = 16.sp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        text = "Boykotlu")
-                }
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = AcikMavi
-                    ),
+                    },
+                    text = { Text("Boykotlu") }
+                )
+                Tab(
+                    selectedContentColor = MaterialTheme.colorScheme.onBackground,
+                    selected = selectedTabIndex == 2,
                     onClick = {
+                        selectedTabIndex = 2
                         viewModel.loadFilterProducts("Uygun")
-                    }) {
-                    Text(
-                        fontSize = 16.sp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        text = "Uygun")
-                }
+                    },
+                    text = { Text("Uygun") }
+                )
             }
+
             Spacer(modifier = Modifier.padding(10.dp))
+
             if (state.value.isLoading) {
                 CircularProgressIndicator(
                     color = Color.Red,
@@ -141,44 +120,56 @@ fun HomePageView(
                         .align(Alignment.CenterHorizontally)
                         .padding(16.dp)
                 )
-            }
-            else{
-                if (state.value.productList.isEmpty()){
-                    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            } else {
+                if (state.value.productList.isEmpty()) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         Text(
                             color = MaterialTheme.colorScheme.onBackground,
                             fontWeight = FontWeight.Bold,
                             fontSize = 24.sp,
-                            text = "Aradığınız Sonuç Bulunamadı")
+                            text = "Aradığınız Sonuç Bulunamadı"
+                        )
                     }
-                }
-               else{
+                } else {
                     LazyVerticalGrid(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(bottom = 140.dp),
-                        columns = GridCells.Fixed(2)) {
-                        items(state.value.productList){productList->
+                        columns = GridCells.Fixed(2)
+                    ) {
+                        items(state.value.productList) { productList ->
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(5.dp)
                                     .size(250.dp)
                                     .clickable {
-                                        val movieObject = Gson().toJson(productList)
-                                        val encodedMovieObject =
-                                            URLEncoder.encode(movieObject, "UTF-8")
-                                        navController.navigate(Screan.ProductDetailPageView.route + "/$encodedMovieObject")
-                                    }) {
-                                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
+                                        val productObject = Gson().toJson(productList)
+                                        val encodedProductObject =
+                                            URLEncoder.encode(productObject, "UTF-8")
+                                        navController.navigate(Screan.ProductDetailPageView.route + "/$encodedProductObject")
+                                    }
+                            ) {
+                                Column(
+                                    modifier = Modifier.fillMaxSize(),
+                                    verticalArrangement = Arrangement.Top,
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
                                     Image(
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .size(150.dp),
                                         contentScale = ContentScale.Crop,
-                                        painter = rememberAsyncImagePainter(model = productList.productImage,
-                                            imageLoader = ImageLoader(context) ),
-                                        contentDescription ="" )
+                                        painter = rememberAsyncImagePainter(
+                                            model = productList.productImage,
+                                            imageLoader = ImageLoader(context)
+                                        ),
+                                        contentDescription = ""
+                                    )
                                     Spacer(modifier = Modifier.padding(5.dp))
                                     Box(
                                         modifier = Modifier
@@ -207,12 +198,13 @@ fun HomePageView(
                                         color = MaterialTheme.colorScheme.onBackground,
                                         fontSize = 20.sp,
                                         fontWeight = FontWeight.Bold,
-                                        text = productList.productName)
+                                        text = productList.productName
+                                    )
                                 }
                             }
                         }
                     }
-               }
+                }
             }
         }
     }
