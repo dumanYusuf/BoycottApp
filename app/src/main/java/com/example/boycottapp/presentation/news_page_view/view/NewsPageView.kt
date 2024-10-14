@@ -4,6 +4,7 @@ package com.example.boycottapp.presentation.news_page_view.view
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -66,19 +68,30 @@ fun NewsPageView(
                 )
             }
             else{
-                LazyColumn (modifier = Modifier.fillMaxSize().padding(bottom = 140.dp)){
+                LazyColumn (modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 140.dp)){
                     items(state.value.newsList){news->
                         Card (modifier = Modifier
                             .fillMaxWidth()
                             .padding(10.dp)
                             .background(Color.Black)
-                            .height(300.dp)){
-                            Image(
-                                modifier = Modifier
-                                    .fillMaxWidth().size(300.dp),
-                                contentScale = ContentScale.Crop,
-                                painter = rememberAsyncImagePainter(model =news.newsImage , imageLoader = ImageLoader(context) ) ,
-                                contentDescription = "")
+                            .size(300.dp)){
+                           Box {
+                               Image(
+                                   modifier = Modifier
+                                       .fillMaxWidth()
+                                       .size(300.dp),
+                                   contentScale = ContentScale.Crop,
+                                   painter = rememberAsyncImagePainter(model =news.newsImage , imageLoader = ImageLoader(context) ) ,
+                                   contentDescription = "")
+                               Text(
+                                   modifier = Modifier.align(Alignment.BottomEnd),
+                                   color = Color.White,
+                                   fontSize = 20.sp,
+                                   fontWeight = FontWeight.Bold,
+                                   text = news.newsTitle)
+                           }
                         }
                     }
 

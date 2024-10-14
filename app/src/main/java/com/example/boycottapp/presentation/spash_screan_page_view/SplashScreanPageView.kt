@@ -30,11 +30,11 @@ fun SplashScreen(navController: NavController) {
                     text = "TüketmeX",
                     fontSize = 36.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
 
             Spacer(modifier = Modifier.height(16.dp))
-            CircularProgressIndicator(color = Color.Black)
+            CircularProgressIndicator(color = MaterialTheme.colorScheme.onBackground)
         }
     }
 }
