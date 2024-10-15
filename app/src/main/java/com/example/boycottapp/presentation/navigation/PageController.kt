@@ -2,17 +2,12 @@ package com.example.boycottapp.presentation.navigation
 
 import SplashScreen
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,6 +18,7 @@ import com.example.boycottapp.BannerAdView
 import com.example.boycottapp.R
 import com.example.boycottapp.Screan
 import com.example.boycottapp.domain.model.Category
+import com.example.boycottapp.domain.model.News
 import com.example.boycottapp.domain.model.Products
 import com.example.boycottapp.presentation.about_app_page_view.AboutAppPageView
 import com.example.boycottapp.presentation.about_us_view.view.AboutPageView
@@ -31,6 +27,7 @@ import com.example.boycottapp.presentation.category_page_view.view.CategoryPageV
 import com.example.boycottapp.presentation.contact_us_page_view.ContactUsePageView
 import com.example.boycottapp.presentation.donation_page_view.DonationPage
 import com.example.boycottapp.presentation.home_page_view.view.HomePageView
+import com.example.boycottapp.presentation.news_page_detail_page.NewsDetailPage
 import com.example.boycottapp.presentation.news_page_view.view.NewsPageView
 import com.example.boycottapp.presentation.objection_page_view.view.ObjectionPageView
 import com.example.boycottapp.presentation.partner_ship_page_view.PartnerShipPageView
@@ -38,6 +35,7 @@ import com.example.boycottapp.presentation.product_detail_view.ProductDetailPage
 import com.example.boycottapp.presentation.suggestion_page_view.view.SuggestionPageView
 import com.google.gson.Gson
 import java.net.URLDecoder
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -107,7 +105,21 @@ fun PageController() {
                     )
                 }
                 composable(Screan.NewsPageView.route) {
-                    NewsPageView()
+                    NewsPageView(navController = navController)
+                }
+                composable(Screan.NewsDetailPage.route+"/{news}",
+                    arguments = listOf(
+                        navArgument("news"){type= NavType.StringType}
+                    )
+                ) {
+                    val news = it.arguments?.getString("news")
+                    val decodeNews = URLDecoder.decode(news, "UTF-8")
+                    val newsHaber = Gson().fromJson(decodeNews, News::class.java)
+                    NewsDetailPage(
+                        onBackPressed = {
+                            navController.popBackStack()
+                            currentIndex.value=2
+                        }, news =newsHaber )
                 }
                 composable(Screan.AboutPageView.route) {
                     AboutPageView(navController = navController)

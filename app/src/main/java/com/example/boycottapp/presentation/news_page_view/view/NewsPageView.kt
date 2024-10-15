@@ -4,6 +4,7 @@ package com.example.boycottapp.presentation.news_page_view.view
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,13 +32,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
+import com.example.boycottapp.Screan
 import com.example.boycottapp.presentation.news_page_view.NewsViewModel
+import com.google.gson.Gson
+import java.net.URLEncoder
 
 @Composable
 fun NewsPageView(
-    viewModel: NewsViewModel= hiltViewModel()
+    viewModel: NewsViewModel= hiltViewModel(),
+    navController: NavController
 ) {
 
     val state=viewModel.state.collectAsState()
@@ -81,7 +87,12 @@ fun NewsPageView(
                                Image(
                                    modifier = Modifier
                                        .fillMaxWidth()
-                                       .size(300.dp),
+                                       .size(300.dp).clickable {
+                                           val newsObject = Gson().toJson(news)
+                                           val encodedProductObject =
+                                               URLEncoder.encode(newsObject, "UTF-8")
+                                           navController.navigate(Screan.NewsDetailPage.route+"/$encodedProductObject")
+                                       },
                                    contentScale = ContentScale.Crop,
                                    painter = rememberAsyncImagePainter(model =news.newsImage , imageLoader = ImageLoader(context) ) ,
                                    contentDescription = "")

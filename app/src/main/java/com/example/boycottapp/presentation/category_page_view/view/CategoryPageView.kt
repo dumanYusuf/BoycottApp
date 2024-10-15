@@ -79,7 +79,9 @@ fun CategoryPageView(
                                .fillMaxWidth()
                                .padding(5.dp)
                                .size(250.dp).clickable {
-
+                                   val productObject = Gson().toJson(categoryList)
+                                   val encodedProductObject = URLEncoder.encode(productObject, "UTF-8")
+                                   navController.navigate(Screan.CategoryFilterProductPage.route+"/$encodedProductObject")
                                }){
                            Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
                                Image(
@@ -87,9 +89,7 @@ fun CategoryPageView(
                                        .fillMaxWidth()
                                        .size(150.dp)
                                        .clickable {
-                                           val productObject = Gson().toJson(categoryList)
-                                           val encodedProductObject = URLEncoder.encode(productObject, "UTF-8")
-                                           navController.navigate(Screan.CategoryFilterProductPage.route+"/$encodedProductObject")
+
                                        },
                                    contentScale = ContentScale.Crop,
                                    painter = rememberAsyncImagePainter(model = categoryList.categoryImage,
