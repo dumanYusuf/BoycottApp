@@ -1,6 +1,7 @@
 package com.example.boycottapp.presentation.about_us_view.view
 
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -22,8 +24,18 @@ import com.example.boycottapp.presentation.component.CustomCard
 
 @Composable
 fun AboutPageView(
-    navController: NavController
+    navController: NavController,
+    curentIndex:MutableState<Int>
 ) {
+
+
+    BackHandler {
+        curentIndex.value = 0
+        navController.navigate(Screan.HomePageView.route) {
+            popUpTo(Screan.HomePageView.route) { inclusive = true }
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -48,7 +60,7 @@ fun AboutPageView(
             text = "Hakkımızda"
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         CustomCard(
             title = "İş Birliği",
@@ -58,7 +70,7 @@ fun AboutPageView(
         )
 
         // İkinci Kart
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = "İletişim",
@@ -77,7 +89,7 @@ fun AboutPageView(
             text = "Öneri"
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         CustomCard(
             title = "İtiraz",
@@ -88,13 +100,19 @@ fun AboutPageView(
             text = "İtiraz"
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         CustomCard(
             title = "Bize Ulaş",
             onClick = { navController.navigate(Screan.ContactUsePageView.route) },
             imageRes = R.drawable.mailllll,
             text = "Bize Ulaş"
+        )
+        CustomCard(
+            title = "ChatApp",
+            onClick = { navController.navigate(Screan.GeminiPageView.route) },
+            imageRes = R.drawable.gemini,
+            text = "Chate Sor"
         )
     }
 }

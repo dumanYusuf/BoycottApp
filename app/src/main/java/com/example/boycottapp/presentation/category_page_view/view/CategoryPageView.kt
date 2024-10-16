@@ -1,5 +1,6 @@
 package com.example.boycottapp.presentation.category_page_view.view
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,10 +42,18 @@ import java.net.URLEncoder
 fun CategoryPageView(
     viewModel: CategoryViewModel= hiltViewModel(),
     navController: NavController,
+    curentIndex:MutableState<Int>
 ) {
 
     LaunchedEffect(key1 = true) {
         viewModel.loadCategory()
+    }
+
+    BackHandler {
+        curentIndex.value = 0
+        navController.navigate(Screan.HomePageView.route) {
+            popUpTo(Screan.HomePageView.route) { inclusive = true }
+        }
     }
 
     val state=viewModel.state.collectAsState()
@@ -79,9 +89,7 @@ fun CategoryPageView(
                                .fillMaxWidth()
                                .padding(5.dp)
                                .size(250.dp).clickable {
-                                   val productObject = Gson().toJson(categoryList)
-                                   val encodedProductObject = URLEncoder.encode(productObject, "UTF-8")
-                                   navController.navigate(Screan.CategoryFilterProductPage.route+"/$encodedProductObject")
+
                                }){
                            Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
                                Image(
@@ -89,7 +97,9 @@ fun CategoryPageView(
                                        .fillMaxWidth()
                                        .size(150.dp)
                                        .clickable {
-
+                                           val productObject = Gson().toJson(categoryList)
+                                           val encodedProductObject = URLEncoder.encode(productObject, "UTF-8")
+                                           navController.navigate(Screan.CategoryFilterProductPage.route+"/$encodedProductObject")
                                        },
                                    contentScale = ContentScale.Crop,
                                    painter = rememberAsyncImagePainter(model = categoryList.categoryImage,

@@ -26,6 +26,7 @@ import com.example.boycottapp.presentation.category_filter_product_page_view.vie
 import com.example.boycottapp.presentation.category_page_view.view.CategoryPageView
 import com.example.boycottapp.presentation.contact_us_page_view.ContactUsePageView
 import com.example.boycottapp.presentation.donation_page_view.DonationPage
+import com.example.boycottapp.presentation.gemini_page_view.GeminiPageView
 import com.example.boycottapp.presentation.home_page_view.view.HomePageView
 import com.example.boycottapp.presentation.news_page_detail_page.NewsDetailPage
 import com.example.boycottapp.presentation.news_page_view.view.NewsPageView
@@ -60,7 +61,7 @@ fun PageController() {
                     HomePageView(navController = navController)
                 }
                 composable(Screan.CategoryPageView.route) {
-                    CategoryPageView(navController = navController)
+                   CategoryPageView(navController = navController, curentIndex = currentIndex)
                 }
                 composable(Screan.SuggestionPageView.route) {
                     SuggestionPageView(
@@ -105,7 +106,7 @@ fun PageController() {
                     )
                 }
                 composable(Screan.NewsPageView.route) {
-                    NewsPageView(navController = navController)
+                   NewsPageView(navController = navController, curentIndex =currentIndex )
                 }
                 composable(Screan.NewsDetailPage.route+"/{news}",
                     arguments = listOf(
@@ -122,7 +123,14 @@ fun PageController() {
                         }, news =newsHaber )
                 }
                 composable(Screan.AboutPageView.route) {
-                    AboutPageView(navController = navController)
+                    AboutPageView(navController = navController, curentIndex = currentIndex)
+                }
+                composable(Screan.GeminiPageView.route) {
+                GeminiPageView(onBackPressed = {
+                    navController.popBackStack()
+                    currentIndex.value=3
+                })
+
                 }
                 composable(Screan.DonationPageView.route) {
                     DonationPage {
@@ -170,7 +178,9 @@ fun PageController() {
                                         3 -> navController.navigate(Screan.AboutPageView.route)
                                     }
                                 },
-                                label = { Text(text = item) },
+                                label = { Text(
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    text = item) },
                                 icon = {
                                     when (item) {
                                         "Anasayfa" -> {

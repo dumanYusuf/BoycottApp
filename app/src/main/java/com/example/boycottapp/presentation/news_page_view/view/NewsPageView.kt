@@ -1,6 +1,7 @@
 package com.example.boycottapp.presentation.news_page_view.view
 
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -22,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +45,8 @@ import java.net.URLEncoder
 @Composable
 fun NewsPageView(
     viewModel: NewsViewModel= hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+     curentIndex:MutableState<Int>
 ) {
 
     val state=viewModel.state.collectAsState()
@@ -51,6 +54,12 @@ fun NewsPageView(
 
     LaunchedEffect(key1 = true) {
         viewModel.loadNewsBoykot()
+    }
+    BackHandler {
+        curentIndex.value = 0
+        navController.navigate(Screan.HomePageView.route) {
+            popUpTo(Screan.HomePageView.route) { inclusive = true }
+        }
     }
 
     Column(modifier = Modifier
