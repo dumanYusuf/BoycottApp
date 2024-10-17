@@ -28,7 +28,6 @@ fun AboutPageView(
     curentIndex:MutableState<Int>
 ) {
 
-
     BackHandler {
         curentIndex.value = 0
         navController.navigate(Screan.HomePageView.route) {
@@ -110,7 +109,9 @@ fun AboutPageView(
         )
         CustomCard(
             title = "ChatApp",
-            onClick = { navController.navigate(Screan.GeminiPageView.route) },
+            onClick = {
+                navController.navigate(Screan.GeminiPageView.route)
+                      },
             imageRes = R.drawable.gemini,
             text = "Chate Sor"
         )

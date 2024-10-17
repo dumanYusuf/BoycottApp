@@ -1,7 +1,10 @@
 package com.example.boycottapp
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog.show
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,11 +24,15 @@ import com.example.boycottapp.ui.theme.BoycottAppTheme
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,12 +67,14 @@ fun BannerAdView(
            factory = {
                AdView(context).apply {
                    setAdSize(AdSize.BANNER) // adSize burada set ediliyor
-                   adUnitId = "ca-app-pub-3940256099942544/6300978111" // Test banner kimliği
+                   adUnitId = "ca-app-pub-3993872063354474/9569193909" // Test banner kimliği
                    loadAd(AdRequest.Builder().build()) // Reklam yükleme işlemi
                }
            }
        )
 }
+
+
 
 // uygulama kimliği
 // ca-app-pub-3993872063354474~2380969020
@@ -76,3 +85,11 @@ fun BannerAdView(
 
 // test banner kimliği
 // ca-app-pub-3940256099942544/6300978111
+
+
+
+// uygulama kimliği
+// ca-app-pub-3993872063354474~2380969020
+
+// interastelle kimliği
+// ca-app-pub-3993872063354474/1642672232
