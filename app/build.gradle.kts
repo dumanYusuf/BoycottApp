@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.boycottapp"
+    namespace = "com.dumanyusuf.boycottapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.boycottapp"
+        applicationId = "com.dumanyusuf.boycottapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -115,5 +115,8 @@ dependencies {
 
     // gemini dependiws
     implementation(libs.generativeai)
+
+
+
 
 }
