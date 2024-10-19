@@ -56,7 +56,7 @@ fun GeminiPageView(
         content = {innerPadding->
             Box(modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)) {
+                .padding(innerPadding).imePadding()) {
                 MessageList(messageList = state,"user")
             }
         },
