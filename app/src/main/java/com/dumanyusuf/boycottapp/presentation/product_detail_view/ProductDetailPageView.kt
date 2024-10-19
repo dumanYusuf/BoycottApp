@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -74,15 +75,19 @@ fun ProductDetailPageView(
                            )
                        }
                         IconButton(onClick = {
-                            val shareIntent=Intent(Intent.ACTION_SEND).apply{
+                           val shareIntent=Intent(Intent.ACTION_SEND).apply{
                                 type = "text/plain"
-                                putExtra(Intent.EXTRA_TEXT, "Check out this product: ${products.productName}")
+                                putExtra(Intent.EXTRA_TEXT, " ${products.productImage} \n " +
+                                        "Durum: ${products.productStatus} \n ürün: ${products.productName} \n Açıklama: ${products.productDescription} ")
                             }
                             context.startActivity(
                                 Intent.createChooser(shareIntent, "Share via")
                             )
+
                         }) {
-                            Icon(painter = painterResource(id = R.drawable.share), contentDescription ="" )
+                            Icon(
+                                modifier = Modifier.size(25.dp),
+                                painter = painterResource(id = R.drawable.share), contentDescription ="" )
                         }
                     }
 

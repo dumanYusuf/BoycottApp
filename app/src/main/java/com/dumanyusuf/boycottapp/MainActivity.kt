@@ -59,7 +59,7 @@ fun BannerAdView(
            factory = {
                AdView(context).apply {
                    setAdSize(AdSize.BANNER) // adSize burada set ediliyor
-                   adUnitId = "ca-app-pub-3993872063354474/9569193909" // Test banner kimliği
+                   adUnitId = "ca-app-pub-3993872063354474/9569193909" //  banner kimliği
                    loadAd(AdRequest.Builder().build()) // Reklam yükleme işlemi
                }
            }
