@@ -1,7 +1,7 @@
 Bu uygulama, Clean Architecture prensiplerine uygun olarak tasarlanmış,  Cloud Firestore veritabanı kullanılarak geliştirilmiş bir bilgilendirme platformudur. Hilt kullanılarak bağımlılık yönetimi sağlanmış ve Use Case katmanı aracılığıyla Repository ve ViewModel arasındaki bağlantılar kurulmuştur.
 
-Uygulama açıldığında, ana sayfaya yönlendirilir. Ana sayfada, güncel olarak boykot edilen veya edilmeyen şirketler Firestore’dan çekilerek listelenmektedir. Kullanıcı istediği firmayı arayabilir  ya da anasayfadan detay sayfasına gidip detaylıca bakabilir kaynaklarıyla beraber 
-isterse paylaşabilir. kategoriler sayfasında kategorilere göre firmaları aratabilir, haberler sayfasında boykotla ilgili güncel haberlere bakabilir,hesap sayfasında ise bizimle iletişime gecebilir ya da
+Uygulama açıldığında, ana sayfaya yönlendirilir. Ana sayfada, güncel olarak boykot edilen veya edilmeyen şirketler Firestore’dan çekilerek listelenmektedir. Kullanıcı istediği firmayı arayabilir  ya da anasayfadan detay sayfasına gidip detaylıca bakabilir kaynaklarıyla beraber,
+isterse  istediği markayı istediği platformadan paylaşabilir. kategoriler sayfasında kategorilere göre firmaları aratabilir, haberler sayfasında boykotla ilgili güncel haberlere bakabilir,hesap sayfasında ise bizimle iletişime gecebilir ya da
 marka öner,itiraz edebilir ve en önemli hesabım sayfasından bulamaığı ürünleri chate sorabilir. ve olmayan ürünleride ordan öğrenebilir.
 Uygulamanın mimarisi şu şekilde yapılandırılmıştır:
 
