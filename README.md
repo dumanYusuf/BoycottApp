@@ -19,3 +19,4 @@ Repository: Veritabanı veya uzak veri kaynakları ile etkileşimde bulunur. Kul
 
 Bu yapı sayesinde uygulamanın kodları daha düzenli, sürdürülebilir ve test edilebilir hale getirilmiştir. Her bir fonksiyon ve sınıf, belirli bir işlevi yerine getirecek şekilde tasarlanmıştır. Bu da uygulamanın bakımı ve geliştirilmesi için büyük avantaj sağlar.
 
+
