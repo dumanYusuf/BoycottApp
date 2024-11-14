@@ -22,4 +22,5 @@ Bu yapı sayesinde uygulamanın kodları daha düzenli, sürdürülebilir ve tes
 ![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim1.png?raw=true)
 ![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim2.png?raw=true)
 ![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim3.png?raw=true)
+![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Ressim6.png?raw=true)
 
