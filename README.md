@@ -19,11 +19,18 @@ Repository: Veritabanı veya uzak veri kaynakları ile etkileşimde bulunur. Kul
 
 Bu yapı sayesinde uygulamanın kodları daha düzenli, sürdürülebilir ve test edilebilir hale getirilmiştir. Her bir fonksiyon ve sınıf, belirli bir işlevi yerine getirecek şekilde tasarlanmıştır. Bu da uygulamanın bakımı ve geliştirilmesi için büyük avantaj sağlar.
 
-![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim1.png?raw=true)
-![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim2.png?raw=true)
-![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim3.png?raw=true)
-![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Ressim6.png?raw=true)
-![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim7.png?raw=true)
-![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim8.png?raw=true)
-![image](https://github.com/dumanYusuf/BoycottApp/blob/master/Resim9.png?raw=true)
+<img src="https://github.com/dumanYusuf/BoycottApp/blob/master/Resim1.png?raw=true" width="400" />
+<br>
+<img src="https://github.com/dumanYusuf/BoycottApp/blob/master/Resim2.png?raw=true" width="400" />
+<br>
+<img src="https://github.com/dumanYusuf/BoycottApp/blob/master/Resim3.png?raw=true" width="400" />
+<br>
+<img src="https://github.com/dumanYusuf/BoycottApp/blob/master/Ressim6.png?raw=true" width="400" />
+<br>
+<img src="https://github.com/dumanYusuf/BoycottApp/blob/master/Resim7.png?raw=true" width="400" />
+<br>
+<img src="https://github.com/dumanYusuf/BoycottApp/blob/master/Resim8.png?raw=true" width="400" />
+<br>
+<img src="https://github.com/dumanYusuf/BoycottApp/blob/master/Resim9.png?raw=true" width="400" />
+
 
